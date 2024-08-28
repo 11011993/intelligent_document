@@ -11,6 +11,7 @@ from pdf2image import convert_from_path
 import pytesseract
 import tempfile
 import requests
+import spacy
 
 def upload_doc(request):
     if request.method == 'POST':
@@ -43,9 +44,20 @@ class GetDocument(APIView):
 
         try:
             images = convert_from_path(temp_pdf_path)
+            extracted_text = ""
             for i, image in enumerate(images):
                 text = pytesseract.image_to_string(image)
+                extracted_text += text
                 print(f"Page {i+1} Text:\n{text}\n")
+
+            nlp = spacy.load("en_core_web_sm")
+            doc = nlp(extracted_text)
+
+            # Extract entities using spaCy
+            entities = [{"text": ent.text, "label": ent.label_} for ent in doc.ents]
+            print(f"Extracted Entities: {entities}")
+
+            # You can also add other AI processing here (Text Classification, Sentiment Analysis, etc.)
             return Response({"pdf_url": pdf_url}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": f"Failed to process PDF: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
