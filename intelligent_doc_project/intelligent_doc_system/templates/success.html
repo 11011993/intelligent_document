@@ -1,2 +1,31 @@
 
 <p>Upload successful!</p>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parsed Data</title>
+</head>
+<body>
+    <h1>Parsed API Response Data</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Text</th>
+                <th>Label</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.text }}</td>
+                <td>{{ item.label }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
