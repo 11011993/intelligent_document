@@ -1,0 +1,8 @@
+1. Setup Django Project "Intelligent_doc_system"
+2. Create an app "document" under the Project
+3. Create a model for database schema to save user_id, pdf and image
+4. apply authentication and authorization to upload pdf and image
+5. create an api to upload pdf and image to authenticated user
+6. create an api to process pdf and image to extract data from pdf and show on frontened 
+7. Used spacy library of AI to extract data
+8. Used pytesseract library to extract data from pdf and convert in string
